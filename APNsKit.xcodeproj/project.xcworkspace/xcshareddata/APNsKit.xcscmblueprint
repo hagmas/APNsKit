@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "3DA82495CA2199B9C34A4BAB2FB2ACDDD02CA769",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "3DA82495CA2199B9C34A4BAB2FB2ACDDD02CA769" : 9223372036854775807,
+    "CA86F53ED6CB060B09097483BD033980A4C323F8" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "05E42A2B-40F8-4295-A7A4-C15C0F9F496D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "3DA82495CA2199B9C34A4BAB2FB2ACDDD02CA769" : "APNsKit\/",
+    "CA86F53ED6CB060B09097483BD033980A4C323F8" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "APNsKit",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "APNsKit.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:hagmas\/APNsKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3DA82495CA2199B9C34A4BAB2FB2ACDDD02CA769"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:hagmas\/Parrot.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CA86F53ED6CB060B09097483BD033980A4C323F8"
+    }
+  ]
+}
