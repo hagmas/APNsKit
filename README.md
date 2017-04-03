@@ -33,3 +33,23 @@ if let connection = try? Connection(p12FileName: "<#Your p12 file name#>", passP
 ```
 #1 [Apple's Payload Key Reference](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW1)
 
+## Requirements
+* Xcode 8.2.1
+* Swift 3.0
+
+## Installation
+* APNsKit doesn't include any external depenancies.
+* APNsKit currently supports only Carthage.
+### [Carthage](https://github.com/Carthage/Carthage)
+
+**Tested with `carthage version`: `0.20.1`**
+
+Add this to `Cartfile`
+
+```
+github "hagmas/APNsKit"
+```
+
+```bash
+$ carthage update
+```
