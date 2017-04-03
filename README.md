@@ -1,10 +1,10 @@
 # APNsKit
-A framework to send Apple notifications from Playground.
+A framework to send Apple notifications.
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ## About APNsKit
-APNsKit is a swift framework to send Apple notifications to iOS devices. Especially, with Playground it lets you to create interactive tool to send push notifications for debugging purpose. Check out the Playground `PushViewController.playground` bundled with the Workspace.<br><br>
+APNsKit is a swift framework to send Apple notifications to iOS devices. Especially, with Playground it lets you to create interactive tool to send push notifications for debugging purposes. Check out the Playground `PushViewController.playground` bundled with the Workspace.<br><br>
 <img src="https://cloud.githubusercontent.com/assets/7201608/24595682/eb08921e-1873-11e7-97d5-19abb21c1a1f.png" width="607">
 
 ## Usage
