@@ -14,7 +14,6 @@
 		C0644ACD1E783A7000334798 /* APNsServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0644AC71E783A7000334798 /* APNsServer.swift */; };
 		C0644ACE1E783A7000334798 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0644AC81E783A7000334798 /* Connection.swift */; };
 		C0644ACF1E783A7000334798 /* PKCS12Adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0644AC91E783A7000334798 /* PKCS12Adapter.swift */; };
-		C0644AD31E7C345700334798 /* PushView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0644AD21E7C345700334798 /* PushView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		C0644AC71E783A7000334798 /* APNsServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APNsServer.swift; sourceTree = "<group>"; };
 		C0644AC81E783A7000334798 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		C0644AC91E783A7000334798 /* PKCS12Adapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKCS12Adapter.swift; sourceTree = "<group>"; };
-		C0644AD21E7C345700334798 /* PushView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PushView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +66,6 @@
 				C0644AC71E783A7000334798 /* APNsServer.swift */,
 				C0644AC81E783A7000334798 /* Connection.swift */,
 				C0644AC91E783A7000334798 /* PKCS12Adapter.swift */,
-				C0644AD21E7C345700334798 /* PushView.xib */,
 			);
 			path = APNsKit;
 			sourceTree = "<group>";
@@ -142,7 +139,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0644AD31E7C345700334798 /* PushView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +207,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator watchos watchsimulator appletvos appletvsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -257,6 +254,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator watchos watchsimulator appletvos appletvsimulator";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

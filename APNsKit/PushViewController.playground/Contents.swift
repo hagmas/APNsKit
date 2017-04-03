@@ -2,7 +2,7 @@
 
  # How to use this playground
  
- 1. Build the framework.
+ 1. Build the framework with the target "Generic iOS Device".
  2. Create the provider client certificate. (Follow the steps described [here](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW11))
  3. Export your identity from the keychain app in the Personal Information Exchange Format (.p12) and place it under the Resources folder of this playground.
  4. Fill port number, developement/production server, the device token of the target device, the name of the p12 file and its pass phrase.
