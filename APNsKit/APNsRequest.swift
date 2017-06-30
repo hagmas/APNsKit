@@ -28,7 +28,11 @@ public struct APNsRequest {
         var request = URLRequest(url: url)
         request.addValue(UUID().uuidString, forHTTPHeaderField: "apns-id")
         request.httpMethod = APNsRequest.method
-        request.httpBody = payload.data
+        do {
+            request.httpBody = try payload.encode()
+        } catch {
+            print("Encode Error: \(error)")
+        }
         return request
     }
 }

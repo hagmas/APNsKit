@@ -1,143 +1,73 @@
 import Foundation
 
 public struct APNsPayload {
-    let title: String?
-    let body: String
-    let titleLocKey: String?
-    let titleLocArgs: [String]?
-    let actionLocKey: String?
-    let locKey: String?
-    let locArgs: [String]?
-    let launchImage: String?
+    struct APS: Codable {
+        struct Alert: Codable {
+            enum CodingKeys: String, CodingKey {
+                case title
+                case body
+                case titleLocKey = "title-loc-key"
+                case titleLocArgs = "title-loc-args"
+                case actionLocKey = "action-loc-key"
+                case locKey = "loc-key"
+                case locArgs = "loc-args"
+                case launchImage = "launch-image"
+            }
+            
+            let title: String?
+            let body: String
+            let titleLocKey: String?
+            let titleLocArgs: [String]?
+            let actionLocKey: String?
+            let locKey: String?
+            let locArgs: [String]?
+            let launchImage: String?
+        }
+        
+        enum CodingKeys: String, CodingKey {
+            case alert
+            case badge
+            case sound
+            case contentAvailable = "content-available"
+            case mutableContent = "mutable-content"
+            case category
+            case threadId = "thread-id"
+        }
+        
+        let alert: Alert
+        let badge: Int?
+        let sound: String?
+        let contentAvailable: Int?
+        let mutableContent: Int?
+        let category: String?
+        let threadId: String?
+    }
+
+    enum CodingKeys: CodingKey {
+        case aps
+        case custom
+    }
     
-    let badge: Int?
-    let sound: String?
-    let contentAvailable: Int?
-    let mutableContent: Int?
-    let category: String?
-    let threadId: String?
-    
+    let aps: APS
     let custom: [String: Any]?
     
-    public init(
-        title: String? = nil,
-        body: String,
-        titleLocKey: String? = nil,
-        titleLocArgs: [String]? = nil,
-        actionLocKey: String? = nil,
-        locKey: String? = nil,
-        locArgs: [String]? = nil,
-        launchImage: String? = nil,
+    func encode() throws -> Data {
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(aps)
         
-        badge: Int? = nil,
-        sound: String? = nil,
-        contentAvailable: Int? = nil,
-        mutableContent: Int? = nil,
-        category: String? = nil,
-        threadId: String? = nil,
-        
-        custom: [String: Any]? = nil) {
-        self.title = title
-        self.body = body
-        self.titleLocKey = titleLocKey
-        self.titleLocArgs = titleLocArgs
-        self.actionLocKey = actionLocKey
-        self.locKey = locKey
-        self.locArgs = locArgs
-        self.launchImage = launchImage
-        
-        self.badge = badge
-        self.sound = sound
-        self.contentAvailable = contentAvailable
-        self.mutableContent = mutableContent
-        self.category = category
-        self.threadId = threadId
-        
-        self.custom = custom
-    }
-    
-    public var dictionary: [String: Any] {
-        // Alert
-        var alert: [String: Any] = ["body": body]
-        
-        if let title = title {
-            alert["title"] = title
+        let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+
+        guard var mutableJson = json as? [AnyHashable: Any] else {
+            fatalError("JSON Object couldn't be casted as [AnyHashable: Any]")
         }
         
-        if let titleLocKey = titleLocKey {
-            alert["title-loc-key"] = titleLocKey
+        custom?.forEach { (arg: (key: String, value: Any)) in
+            let (key, value) = arg
+            mutableJson[key] = value
         }
         
-        if let titleLocArgs = titleLocArgs {
-            alert["title-loc-args"] = titleLocArgs
-        }
+        print("JSON! \(mutableJson)")
         
-        if let actionLocKey = actionLocKey {
-            alert["action-loc-key"] = actionLocKey
-        }
-        
-        if let locKey = locKey {
-            alert["loc-key"] = locKey
-        }
-        
-        if let locArgs = locArgs {
-            alert["loc-args"] = locArgs
-        }
-        
-        if let launchImage = launchImage {
-            alert["launch-image"] = launchImage
-        }
-        
-        // APS
-        var dictionary: [String: Any] = ["alert": alert]
-        
-        if let badge = badge {
-            dictionary["badge"] = badge
-        }
-        
-        if let sound = sound {
-            dictionary["sound"] = sound
-        }
-        
-        if let contentAvailable = contentAvailable {
-            dictionary["content-available"] = contentAvailable
-        }
-        
-        if let mutableContent = mutableContent {
-            dictionary["mutable-content"] = mutableContent
-        }
-        
-        if let category = category {
-            dictionary["category"] = category
-        }
-        
-        if let threadId = threadId {
-            dictionary["thread-id"] = threadId
-        }
-        
-        var payload: [String: Any] = ["aps": dictionary]
-        
-        // Custom
-        custom?.forEach {
-            payload[$0] = $1
-        }
-        
-        return payload
-    }
-    
-    public static func convert(parameters: Any) -> String {
-        if let dictionary = parameters as? [String: Any] {
-            return "{" + dictionary.map { "\"\($0.key)\":" + convert(parameters: $0.value) }.joined(separator: ",") + "}"
-        } else if let array = parameters as? [String] {
-            return "[" + array.joined(separator: ",") + "]"
-        } else if let int = parameters as? Int {
-            return "\(int)"
-        } else {
-            return "\"\(parameters)\""
-        }
-    }
-    
-    public var data: Data? {
-        return APNsPayload.convert(parameters: dictionary).data(using: .unicode)
+        return try JSONSerialization.data(withJSONObject: mutableJson, options: .prettyPrinted)
     }
 }
