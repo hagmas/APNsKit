@@ -42,7 +42,7 @@ public class PushViewController: UIViewController {
         pushButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
-    func pushed() {
+    @objc func pushed() {
         connection.send(request: request) {
             switch $0 {
             case .success:

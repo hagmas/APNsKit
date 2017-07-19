@@ -51,23 +51,59 @@ public struct APNsPayload {
     let aps: APS
     let custom: [String: Any]?
     
-    func encode() throws -> Data {
+    public init(
+        title: String? = nil,
+        body: String,
+        titleLocKey: String? = nil,
+        titleLocArgs: [String]? = nil,
+        actionLocKey: String? = nil,
+        locKey: String? = nil,
+        locArgs: [String]? = nil,
+        launchImage: String? = nil,
+        
+        badge: Int? = nil,
+        sound: String? = nil,
+        contentAvailable: Int? = nil,
+        mutableContent: Int? = nil,
+        category: String? = nil,
+        threadId: String? = nil,
+        
+        custom: [String: Any]? = nil) {
+        
+        let alert = APS.Alert(title: title,
+                              body: body,
+                              titleLocKey: titleLocKey,
+                              titleLocArgs: titleLocArgs,
+                              actionLocKey: actionLocKey,
+                              locKey: locKey,
+                              locArgs: locArgs,
+                              launchImage: launchImage)
+        
+        let aps = APS(alert: alert,
+                      badge: badge,
+                      sound: sound,
+                      contentAvailable: contentAvailable,
+                      mutableContent: mutableContent,
+                      category: category,
+                      threadId: threadId)
+        
+        self.aps = aps
+        self.custom = custom
+    }
+
+    internal func encode() throws -> Data {
         let encoder = JSONEncoder()
         let data = try encoder.encode(aps)
         
-        let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+        let apsJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
 
-        guard var mutableJson = json as? [AnyHashable: Any] else {
-            fatalError("JSON Object couldn't be casted as [AnyHashable: Any]")
-        }
+        var json: [String: Any] = ["aps": apsJSON]
         
         custom?.forEach { (arg: (key: String, value: Any)) in
             let (key, value) = arg
-            mutableJson[key] = value
+            json[key] = value
         }
         
-        print("JSON! \(mutableJson)")
-        
-        return try JSONSerialization.data(withJSONObject: mutableJson, options: .prettyPrinted)
+        return try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
     }
 }
