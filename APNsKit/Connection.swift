@@ -17,17 +17,31 @@ public class Connection: NSObject, URLSessionDelegate {
         let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
         if let urlRequest = request.urlRequest {
             let task = session.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
-                if error == nil {
-                    // success
+                // The APNs server response for the requst is returned with the data object.
+                // If the error object is not nil, there is more likely a problem with the connection or the network.
+                if let error = error {
+                    resultHandler(.failure(errorCode: 0, message: "Unkonwn Error Occured: \(error)"))
+                    return
+                }
+                
+                guard let data = data else {
                     resultHandler(.success)
+                    return
+                }
+                
+                if data.isEmpty {
+                    resultHandler(.success)
+                    return
+                }
+                
+                if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: String],
+                    let reason = json?["reason"],
+                    let httpResponse = response as? HTTPURLResponse {
+                    resultHandler(.failure(errorCode: httpResponse.statusCode, message: reason))
+                    return
                 } else {
-                    if let data = data,
-                        let reason = String(data: data, encoding: .ascii),
-                        let httpResponse = response as? HTTPURLResponse {
-                        resultHandler(.failure(errorCode: httpResponse.statusCode, message: reason))
-                    } else {
-                        resultHandler(.failure(errorCode: 0, message: "Unkonwn Error Occured"))
-                    }
+                    resultHandler(.failure(errorCode: 0, message: "Unkonwn Error Occured"))
+                    return
                 }
             })
             task.resume()
