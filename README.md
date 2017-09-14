@@ -11,11 +11,15 @@ APNsKit is a swift framework to send Apple notifications to iOS devices. Especia
 ```swift
 import APNsKit
 
-// Create a APNs payload. See Apple's Payload Key Reference (#1) for its specifications.
+// Setting header fields is optional. Refer (#1) for configurable header fields of APNs request.
+let header = APNsRequest.Header(priority: .p10, topic: "<#The topic of the remote notification#>")
+
+// Create a APNs payload. See Apple's Payload Key Reference (#2) for its specifications.
 let payload = APNsPayload(title: "Hello World!", body: "This is APNsKit.", contentAvailable: 1)
 let request = APNsRequest(port: .p2197,
                           server: .development,
                           deviceToken: "<#The target device token#>",
+                          header: header,
                           payload: payload)
 
 // Create a connection that wraps up URLSession and its authentication challenges.
@@ -32,7 +36,9 @@ if let connection = try? Connection(p12FileName: "<#Your p12 file name#>", passP
     })
 }
 ```
-#1 [Apple's Payload Key Reference](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW1)
+#1 [HTTP/2 Request to APNs](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/CommunicatingwithAPNs.html#//apple_ref/doc/uid/TP40008194-CH11-SW11)
+
+#2 [Apple's Payload Key Reference](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW1)
 
 ## Requirements
 * Xcode 8.2.1
