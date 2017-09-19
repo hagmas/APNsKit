@@ -12,11 +12,11 @@ public struct APNsRequest {
         public let topic: String?
         public let collapseId: String?
         
-        init(id: String = UUID().uuidString,
-             expiration: Date = Date(timeIntervalSince1970: 0),
-             priority: Priority = .p10,
-             topic: String? = nil,
-             collapseId: String? = nil) {
+        public init(id: String = UUID().uuidString,
+                    expiration: Date = Date(timeIntervalSince1970: 0),
+                    priority: Priority = .p10,
+                    topic: String? = nil,
+                    collapseId: String? = nil) {
             self.id = id
             self.expiration = expiration
             self.priority = .p10
